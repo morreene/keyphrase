@@ -69,5 +69,6 @@ def score_keyphrases_by_tfidf(texts, candidates='chunks'):
     return corpus_tfidf, dictionary
     
     
-b, c =score_keyphrases_by_tfidf(text)
+b, c =score_keyphrases_by_tfidf(doc_complete)
 
+texts = doc_complete

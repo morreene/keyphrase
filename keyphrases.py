@@ -3,7 +3,7 @@ import os
 
 os.getcwd()
 
-os.chdir(r'F:\Projects\keyphrase')
+os.chdir(r'.\keyphrase')
 
 #################################################
 '''
@@ -27,7 +27,7 @@ text = f.read()
 #Read entire corpus
 #CORPUS_TEXT = '/Users/tonyojeda/Desktop/keyphrase/ddl_corpus/corpus_text'
 
-CORPUS_TEXT = r'F:\Projects\keyphrase\Files2015A'
+CORPUS_TEXT = r'./Files2015A'
 texts = PlaintextCorpusReader(CORPUS_TEXT, '.*\.txt')
 
 def corpus_info(corpus):
@@ -98,3 +98,4 @@ def score_keyphrases_by_tfidf(texts, candidates='chunks'):
     corpus_tfidf = tfidf[corpus]
     return corpus_tfidf, dictionary
 
+score_keyphrases_by_tfidf(texts)
