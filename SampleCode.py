@@ -1,3 +1,40 @@
+###################################################################################################
+'''Ultimate Guide to Understand & Implement Natural Language Processing (with codes in Python)
+https://www.analyticsvidhya.com/blog/2017/01/ultimate-guide-to-understand-implement-natural-language-processing-codes-in-python/'''
+###################################################################################################
+
+# B. Topic Modeling
+
+doc1 = "Sugar is bad to consume. My sister likes to have sugar, but not my father." 
+doc2 = "My father spends a lot of time driving my sister around to dance practice."
+doc3 = "Doctors suggest that driving may cause increased stress and blood pressure."
+doc_complete = [doc1, doc2, doc3]
+doc_clean = [doc.split() for doc in doc_complete]
+
+import gensim
+from gensim import corpora
+
+# Creating the term dictionary of our corpus, where every unique term is assigned an index.  
+dictionary = corpora.Dictionary(doc_clean)
+
+# Converting list of documents (corpus) into Document Term Matrix using dictionary prepared above. 
+doc_term_matrix = [dictionary.doc2bow(doc) for doc in doc_clean]
+
+# Creating the object for LDA model using gensim library
+Lda = gensim.models.ldamodel.LdaModel
+
+# Running and Training LDA model on the document term matrix
+ldamodel = Lda(doc_term_matrix, num_topics=3, id2word = dictionary, passes=50)
+
+# Results 
+print(ldamodel.print_topics())
+
+
+###################################################################################################
+''' Study the code on Tutorial of Gensim
+https://radimrehurek.com/gensim/tutorial.html'''
+###################################################################################################
+
 # General
 from gensim import corpora, models, similarities
 
@@ -16,14 +53,12 @@ tfidf = models.TfidfModel(corpus)
 vec = [(0, 1), (4, 1)]
 print(tfidf[vec])
 
-
 index = similarities.SparseMatrixSimilarity(tfidf[corpus], num_features=12)
 
 sims = index[tfidf[vec]]
 
 # Corpora and Vector Spaces
 # From Strings to Vectors
-
 
 from gensim import corpora
 
@@ -62,7 +97,6 @@ dictionary.save('/tmp/deerwester.dict')  # store the dictionary, for future refe
 print(dictionary)
 
 print(dictionary.token2id)
-
 
 new_doc = "Human computer interaction"
 new_vec = dictionary.doc2bow(new_doc.lower().split())
